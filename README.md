@@ -1,2 +1,2 @@
 #Demo
-If you want try it, please click here:https://mwang259.github.io/Keynotes/
+If you want to try it, please click here:https://mwang259.github.io/Keynotes/
