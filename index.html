@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css" />
+    <title>Notepad</title>
+</head>
+<body>
+    <section id="app">
+        <header class="header">
+            <h1>Mwang Notepad</h1>
+            <input v-model="todoName" placeholder="please input note..." class="new-todo">
+            <button class="add" @click="add">Add</button>
+        </header>
+        <section class="main">
+            <ul class="todo-list">
+                <li class="todo" v-for="(item, index) in list" :key="item.id">
+                    <div class="view">
+                        <span class="index">{{ index +1 }}.</span><label>{{ item.name}}</label>
+                        <button class="destroy" @click="del(item.id)"></button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <footer class="footer">
+            <span class="todo-count">Total: <strong>{{ list.length}}</strong></span>
+            <button class="clear-completed" @click="clear">Clear ALL</button>
+        </footer>
+    </section>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            todoName:'',
+            list:[
+                {id:1, name:'Run ten kilometres'},
+                {id:2, name:'Jump rope 1000 times'},
+                {id:3, name:'Go shopping at 1 p.m'}
+            ]
+        },
+        methods:{
+            del(id){
+                this.list = this.list.filter(item=> item.id !== id)
+            },
+            add(){
+                if(this.todoName.trim() === ''){
+                    alert("Please input note...");
+                    return;
+                }
+                this.list.unshift({
+                    id: +new Date(),
+                    name: this.todoName
+                })
+                this.todoName='';
+            },
+            clear(){
+                this.list=[]
+            }
+        }
+    })
+
+    
+</script>
+</html>
